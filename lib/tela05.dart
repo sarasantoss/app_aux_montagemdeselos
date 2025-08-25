@@ -1,40 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:montagem/tela02.dart';
-import './tela04.dart';
 
-class Tela03 extends StatefulWidget {
-  final String Y;
+class Tela05 extends StatefulWidget {
+  final String Z, Y, X;
 
-  const Tela03(this.Y, {super.key});
+  const Tela05(this.Y, this.Z, this.X, {super.key});
 
   @override
-  _Tela03State createState() => _Tela03State();
+  _Tela05State createState() => _Tela05State();
 }
 
-class _Tela03State extends State<Tela03> {
-  TextEditingController txtZ = TextEditingController();
+class _Tela05State extends State<Tela05> {
+  TextEditingController txtL1 = TextEditingController();
 
+  /*
   void Salvar() {
-    String Y = widget.Y, Z = txtZ.text;
+    String Y = widget.Y, Z = widget.Z, X = widget.X, L1 = txtL1.text;
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Tela04(Y, Z)),
+      MaterialPageRoute(builder: (context) => Tela05(Y, Z, X, L1)),
     );
   }
-
+*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("3° Passo")),
+      appBar: AppBar(title: const Text("6° Passo")),
       body: Padding(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(20),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text(
-                "3° PASSO:",
+                "6° PASSO:",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 40,
@@ -43,9 +42,9 @@ class _Tela03State extends State<Tela03> {
                   color: Colors.blueGrey,
                 ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 14),
               const Text(
-                "Encontrar a medida Z que será a medida da face da sede estacionária até atrás do anel Dring, insira o valor de 'Z' no desenho abaixo",
+                "Utilizando o paquimetro medir o anel de encosto para encontrar a medida (L1). O anel de encosto deverá acompanhar o conjunto do selo mecânico. Preencha abaixo: ",
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                   fontFamily: 'Roboto',
@@ -53,20 +52,21 @@ class _Tela03State extends State<Tela03> {
                   color: Color.fromARGB(255, 56, 54, 54),
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 10), // Espaço antes do campo de texto
               Align(
-                alignment: Alignment(-0.2, 0.0),
+                alignment: Alignment(-0.1, 0.2),
                 child: SizedBox(
-                  width: 100,
+                  width: 110, // Definimos uma largura para o campo de texto
                   child: Row(
                     children: [
-                      const Text("Z:", style: TextStyle(fontSize: 20)),
+                      const Text("L1:", style: TextStyle(fontSize: 20)),
                       Expanded(
                         child: TextField(
-                          controller: txtZ,
-                          keyboardType: TextInputType.number,
+                          controller: txtL1,
+                          keyboardType:
+                              TextInputType.number, // Teclado numérico
                           decoration: const InputDecoration(
-                            hintText: "Digite aqui",
+                            hintText: " Digite aqui",
                             border: UnderlineInputBorder(),
                             filled: false,
                           ),
@@ -77,10 +77,10 @@ class _Tela03State extends State<Tela03> {
                   ),
                 ),
               ),
-              const SizedBox(height: 14),
+              const SizedBox(height: 10),
               Image.asset(
-                'assets/imagens/terceira.png',
-                width: 110,
+                'assets/imagens/quinta.png',
+                width: 78,
                 fit: BoxFit.contain,
               ),
 
@@ -88,7 +88,13 @@ class _Tela03State extends State<Tela03> {
 
               ElevatedButton(
                 onPressed: () {
-                  Salvar();
+                  /*Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const PassoQuatro(),
+                    ),
+                  ); */
                 },
                 child: const Text("PRÓXIMO"),
               ),
