@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import './tela02.dart';
+import './tela01.dart';
 
 void main() {
-  runApp(MaterialApp(home: Tela01()));
+  runApp(MaterialApp(home: Inicio()));
 }
 
-class Tela01 extends StatefulWidget {
+class Inicio extends StatefulWidget {
   @override
-  _Tela01State createState() => _Tela01State();
+  _InicioState createState() => _InicioState();
 }
 
-class _Tela01State extends State<Tela01> {
+class _InicioState extends State<Inicio> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +36,7 @@ class _Tela01State extends State<Tela01> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Tela02()),
+                  MaterialPageRoute(builder: (context) => Tela01()),
                 );
               },
               child: const Text("INICIO"),

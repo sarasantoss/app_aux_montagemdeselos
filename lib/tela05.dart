@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './tela06.dart';
 
 class Tela05 extends StatefulWidget {
   final String Z, Y, X;
@@ -12,16 +13,15 @@ class Tela05 extends StatefulWidget {
 class _Tela05State extends State<Tela05> {
   TextEditingController txtL1 = TextEditingController();
 
-  /*
   void Salvar() {
     String Y = widget.Y, Z = widget.Z, X = widget.X, L1 = txtL1.text;
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Tela05(Y, Z, X, L1)),
+      MaterialPageRoute(builder: (context) => Tela06(Y, Z, X, L1)),
     );
   }
-*/
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,13 +88,7 @@ class _Tela05State extends State<Tela05> {
 
               ElevatedButton(
                 onPressed: () {
-                  /*Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const PassoQuatro(),
-                    ),
-                  ); */
+                  Salvar();
                 },
                 child: const Text("PRÓXIMO"),
               ),
