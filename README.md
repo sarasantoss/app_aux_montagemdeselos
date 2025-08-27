@@ -23,7 +23,36 @@ Um aplicativo desenvolvido em **Flutter** que auxilia na **montagem de selos**, 
 
 ## 📦 Instalação e Execução
 
+## 📦 Instalação e Execução
+
+## 📦 Instalação e Execução
+
 1. **Clone o repositório:**
 
-   ```bash
-   git clone https://github.com/sarasantoss/app_aux_montagemdeselos.git
+git clone https://github.com/sarasantoss/app_aux_montagemdeselos.git
+
+
+2. **Acesse o diretório do projeto:**
+
+cd app_aux_montagemdeselos
+
+
+3. **Instale as dependências do Flutter:**
+
+flutter pub get
+
+
+4. **Execute o aplicativo:**
+
+flutter run
+
+
+> ⚠️ Certifique-se de ter o Flutter instalado e configurado no seu sistema. [Guia oficial do Flutter](https://flutter.dev/docs/get-started/install)
+
+---
+
+## 📸 Screenshots
+
+
+
+---
