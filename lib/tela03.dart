@@ -1,25 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:montagem/tela02.dart';
 import './tela04.dart';
 
 class Tela03 extends StatefulWidget {
-  final String Y;
+  final String Y, titulo;
 
-  const Tela03(this.Y, {super.key});
+  const Tela03(this.titulo, this.Y, {super.key});
 
   @override
   _Tela03State createState() => _Tela03State();
 }
 
 class _Tela03State extends State<Tela03> {
-  TextEditingController txtZ = TextEditingController();
+  final TextEditingController txtZ = TextEditingController();
 
-  void Salvar() {
-    String Y = widget.Y, Z = txtZ.text;
+  @override
+  void dispose() {
+    txtZ.dispose(); // libera memória
+    super.dispose();
+  }
+
+  void salvar() {
+    String Y = widget.Y, titulo = widget.titulo, Z = txtZ.text;
+
+    print('$Y + $Z');
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Tela04(Y, Z)),
+      MaterialPageRoute(builder: (context) => Tela04(titulo, Y, Z)),
     );
   }
 
@@ -53,44 +60,70 @@ class _Tela03State extends State<Tela03> {
                   color: Color.fromARGB(255, 56, 54, 54),
                 ),
               ),
-              const SizedBox(height: 10),
-              Align(
-                alignment: Alignment(-0.2, 0.0),
-                child: SizedBox(
-                  width: 100,
-                  child: Row(
-                    children: [
-                      const Text("Z:", style: TextStyle(fontSize: 20)),
-                      Expanded(
-                        child: TextField(
-                          controller: txtZ,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(
-                            hintText: "Digite aqui",
-                            border: UnderlineInputBorder(),
-                            filled: false,
-                          ),
-                          style: const TextStyle(fontSize: 15),
-                        ),
+              const SizedBox(height: 20),
+
+              // Campo de entrada Z
+              Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.center, // centraliza o conteúdo
+                children: [
+                  const Text("Z:", style: TextStyle(fontSize: 20)),
+                  const SizedBox(width: 8), // espaço entre o texto e o campo
+                  SizedBox(
+                    width: 120, // define a largura do campo
+                    child: TextField(
+                      controller: txtZ,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        hintText: "Digite aqui",
+                        border: UnderlineInputBorder(),
                       ),
-                    ],
+                      style: const TextStyle(fontSize: 18),
+                    ),
                   ),
-                ),
+                ],
               ),
-              const SizedBox(height: 14),
+
+              const SizedBox(height: 24),
+
+              // Imagem ilustrativa
               Image.asset(
                 'assets/imagens/terceira.png',
-                width: 110,
+                width: 100,
                 fit: BoxFit.contain,
               ),
 
               const SizedBox(height: 40),
 
+              // Botão próximo
               ElevatedButton(
                 onPressed: () {
-                  Salvar();
+                  if (txtZ.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          "Por favor, preencha o campo antes de continuar.",
+                        ),
+                        duration: Duration(seconds: 3),
+                      ),
+                    );
+                  } else if (!RegExp(r'^[0-9.,]+$').hasMatch(txtZ.text)) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          "Digite apenas números, ponto ou vírgula.",
+                        ),
+                        duration: Duration(seconds: 3),
+                      ),
+                    );
+                  } else {
+                    salvar();
+                  }
                 },
-                child: const Text("PRÓXIMO"),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  child: Text("PRÓXIMO", style: TextStyle(fontSize: 18)),
+                ),
               ),
             ],
           ),

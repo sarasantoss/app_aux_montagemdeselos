@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import './tela03.dart';
 
 class Tela02 extends StatefulWidget {
+  final String titulo;
+
+  const Tela02(this.titulo, {super.key});
+
   @override
   _Tela02State createState() => _Tela02State();
 }
@@ -9,10 +13,13 @@ class Tela02 extends StatefulWidget {
 class _Tela02State extends State<Tela02> {
   TextEditingController txtY = TextEditingController();
 
-  void Salvar() {
-    String Y = txtY.text;
-
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Tela03(Y)));
+  void salvar() {
+    String Y = txtY.text, titulo = widget.titulo;
+    print('{$Y}');
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Tela03(titulo, Y)),
+    );
   }
 
   @override
@@ -84,7 +91,28 @@ class _Tela02State extends State<Tela02> {
 
             ElevatedButton(
               onPressed: () {
-                Salvar();
+                if (txtY.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                        "Por favor, preencha o campo antes de continuar.",
+                      ),
+                      duration: Duration(
+                        seconds: 3,
+                      ), // tempo que a mensagem fica visível
+                    ),
+                  );
+                } else if (!RegExp(r'^[0-9.,]+$').hasMatch(txtY.text)) {
+                  // Aceita apenas números, ponto e vírgula
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Digite apenas números, ponto ou vírgula."),
+                      duration: Duration(seconds: 3),
+                    ),
+                  );
+                } else {
+                  salvar();
+                }
               },
               child: const Text("PRÓXIMO"),
             ),

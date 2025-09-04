@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import './tela05.dart';
 
 class Tela04 extends StatefulWidget {
-  final String Z, Y;
+  final String Z, Y, titulo;
 
-  const Tela04(this.Y, this.Z, {super.key});
+  const Tela04(this.titulo, this.Y, this.Z, {super.key});
 
   @override
   _Tela04State createState() => _Tela04State();
@@ -13,12 +13,13 @@ class Tela04 extends StatefulWidget {
 class _Tela04State extends State<Tela04> {
   TextEditingController txtX = TextEditingController();
 
-  void Salvar() {
-    String Y = widget.Y, Z = widget.Z, X = txtX.text;
+  void salvar() {
+    String Y = widget.Y, Z = widget.Z, titulo = widget.titulo, X = txtX.text;
 
+    print('{$Y} +  {$Z} + {$X}');
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Tela05(Y, Z, X)),
+      MaterialPageRoute(builder: (context) => Tela05(titulo, Y, Z, X)),
     );
   }
 
@@ -119,7 +120,30 @@ class _Tela04State extends State<Tela04> {
 
               ElevatedButton(
                 onPressed: () {
-                  Salvar();
+                  if (txtX.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          "Por favor, preencha o campo antes de continuar.",
+                        ),
+                        duration: Duration(
+                          seconds: 3,
+                        ), // tempo que a mensagem fica visível
+                      ),
+                    );
+                  } else if (!RegExp(r'^[0-9.,]+$').hasMatch(txtX.text)) {
+                    // Aceita apenas números, ponto e vírgula
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          "Digite apenas números, ponto ou vírgula.",
+                        ),
+                        duration: Duration(seconds: 3),
+                      ),
+                    );
+                  } else {
+                    salvar();
+                  }
                 },
                 child: const Text("PRÓXIMO"),
               ),

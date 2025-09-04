@@ -7,10 +7,12 @@ class Tela01 extends StatefulWidget {
 }
 
 class _Tela01State extends State<Tela01> {
+  TextEditingController txtTitulo = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Próxima Tela")),
+      appBar: AppBar(title: const Text("1° Passo")),
       body: Padding(
         padding: const EdgeInsetsGeometry.all(16),
         child: Column(
@@ -48,13 +50,29 @@ class _Tela01State extends State<Tela01> {
               ),
             ),
             const SizedBox(height: 24),
-            Image.asset('assets/imagens/primeira.png', width: 300, height: 300),
-            const SizedBox(height: 30),
+            Image.asset('assets/imagens/primeira.png', width: 250, height: 250),
+            const SizedBox(height: 24),
+            const Text(
+              "Titulo da medição (local ou equipamento):",
+              style: TextStyle(fontSize: 16, fontFamily: 'Roboto'),
+            ),
+            TextField(
+              controller: txtTitulo,
+              decoration: const InputDecoration(
+                hintText: "Digite aqui",
+                border: UnderlineInputBorder(),
+                filled: false,
+              ),
+            ),
+
+            const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Tela02()),
+                  MaterialPageRoute(
+                    builder: (context) => Tela02(txtTitulo.text),
+                  ),
                 );
               },
               child: const Text("PRÓXIMO"),

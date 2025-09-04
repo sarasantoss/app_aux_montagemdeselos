@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './tela01.dart';
+import './tela_historico.dart';
 
 void main() {
   runApp(MaterialApp(home: Inicio()));
@@ -32,6 +33,7 @@ class _InicioState extends State<Inicio> {
             const SizedBox(height: 24),
             Image.asset('assets/imagens/primeira.png', width: 300, height: 300),
             const SizedBox(height: 30),
+
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -40,6 +42,17 @@ class _InicioState extends State<Inicio> {
                 );
               },
               child: const Text("INICIO"),
+            ),
+            const SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TelaHistorico()),
+                );
+              },
+
+              child: const Text('HISTÓRICO'),
             ),
           ],
         ),

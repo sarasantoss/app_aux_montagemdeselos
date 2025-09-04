@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import './tela06.dart';
 
 class Tela05 extends StatefulWidget {
-  final String Z, Y, X;
+  final String Z, Y, X, titulo;
 
-  const Tela05(this.Y, this.Z, this.X, {super.key});
+  const Tela05(this.titulo, this.Y, this.Z, this.X, {super.key});
 
   @override
   _Tela05State createState() => _Tela05State();
@@ -13,12 +13,18 @@ class Tela05 extends StatefulWidget {
 class _Tela05State extends State<Tela05> {
   TextEditingController txtL1 = TextEditingController();
 
-  void Salvar() {
-    String Y = widget.Y, Z = widget.Z, X = widget.X, L1 = txtL1.text;
+  void salvar() {
+    String Y = widget.Y,
+        Z = widget.Z,
+        X = widget.X,
+        titulo = widget.titulo,
+        l1 = txtL1.text;
+
+    print('{$Y} +  {$Z} + {$X} + {$l1}');
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Tela06(Y, Z, X, L1)),
+      MaterialPageRoute(builder: (context) => Tela06(titulo, Y, Z, X, l1)),
     );
   }
 
@@ -88,7 +94,30 @@ class _Tela05State extends State<Tela05> {
 
               ElevatedButton(
                 onPressed: () {
-                  Salvar();
+                  if (txtL1.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          "Por favor, preencha o campo antes de continuar.",
+                        ),
+                        duration: Duration(
+                          seconds: 3,
+                        ), // tempo que a mensagem fica visível
+                      ),
+                    );
+                  } else if (!RegExp(r'^[0-9.,]+$').hasMatch(txtL1.text)) {
+                    // Aceita apenas números, ponto e vírgula
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          "Digite apenas números, ponto ou vírgula.",
+                        ),
+                        duration: Duration(seconds: 3),
+                      ),
+                    );
+                  } else {
+                    salvar();
+                  }
                 },
                 child: const Text("PRÓXIMO"),
               ),
